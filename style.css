@@ -25,13 +25,17 @@ section {
 }
 
 button {
-    margin: 2em;
+    margin: 0.5em;
     padding: 0.8em 1.6em;
     border-radius: 1em;
     font-size: larger;
     border: 0px;
     color: white;
     background-color: blueviolet;
+}
+
+#start-quiz-btn {
+    margin: 2em;
 }
 
 button:hover {
