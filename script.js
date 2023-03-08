@@ -64,15 +64,28 @@ var startQuizBtn = document.getElementById("start-quiz-btn");
 var questionText = document.getElementById("question");
 var answerDiv = document.getElementById("answer-div");
 var heroSection = document.getElementById("hero-section");
+var timerElement = document.getElementById("timer");
 
 startQuizBtn.addEventListener("click", startQuiz);
 
 var questionNumber = 0;
+var time = 75;
+var counter;
 
 function startQuiz() {
     answerDiv.innerHTML = "";
     heroSection.removeChild(startQuizBtn);
+    startTimer();
+
     newQuestion();
+}
+
+function startTimer(){
+  counter = setInterval(timer, 1000);
+    function timer(){
+      time--;
+      timerElement.innerHTML = "Time: " + time;  
+    }
 }
 
 function newQuestion(){
@@ -81,18 +94,91 @@ function newQuestion(){
         answerDiv.removeChild(answerDiv.lastElementChild);
     }
 
+    if (questionNumber >= questions.length) {
+      showResults();
+      return;
+    }
+
     questionText.innerHTML = questions[questionNumber].question;
-    console.log(questions[questionNumber].options);
+    //console.log(questions[questionNumber].options);
 
     var i = 1;
     
     questions[questionNumber].options.forEach(element => {
         var answer = document.createElement("button");
-        answer.addEventListener("click", newQuestion);
+
+        answer.addEventListener("click", function() {
+          checkAnswer(questionNumber, element);
+        });
+
         answer.innerHTML = i + ". " + element
         answerDiv.appendChild(answer);
         i++;
     });
 
     questionNumber++;
+}
+
+function checkAnswer(questionNumber, answer){
+
+  console.log(questions[questionNumber - 1].answer)
+
+  if (questions[questionNumber - 1].answer != answer) {
+    time = time - 15;
+    timerElement.innerHTML = "Time: " + time;
+  }
+  
+
+  newQuestion();
+}
+// pass in 2 parameters;
+
+
+var initialsDiv = document.createElement("div");
+var initialsInput = document.createElement("input");
+var initialsBtn = document.createElement("button");
+initialsBtn.innerHTML = "Submit"
+initialsBtn.id = "initialsBtn"
+initialsBtn.addEventListener("click", showHighScores)
+
+//initialsDiv.innerHTML = "Enter initials: <input type=\"text\" name=\"initials\" id=\"initials\"></input><input class=\"submit\" type=\"submit\" value=\"Submit\">"
+
+initialsDiv.innerHTML = "Enter initials: ";
+initialsDiv.appendChild(initialsInput)
+initialsDiv.appendChild(initialsBtn)
+
+
+function showResults() {
+  questionText.innerHTML = "All done!"
+  clearInterval(counter);
+  timerElement.innerHTML = "Time: " + time;  
+  answerDiv.innerHTML = "Your final score is " + time
+  answerDiv.appendChild(initialsDiv);
+
+}
+
+var highScores = [
+]
+
+function showHighScores() {
+
+  // var intialsInput = document.getElementById("initials");
+  // console.log(initialsInput.value);
+  console.log("high score: ", initialsInput.value)
+
+  highScores.push(initialsInput.value + " - " + time)
+
+  questionText.innerHTML = "High Scores";
+
+  var highScoreList = document.createElement("ol");
+
+  highScores.forEach((element) => {
+    var highScore = document.createElement("li");
+    highScore.innerHTML = element;
+    highScoreList.appendChild(highScore);
+  });
+
+  answerDiv.innerHTML = "";
+  answerDiv.appendChild(highScoreList);
+
 }

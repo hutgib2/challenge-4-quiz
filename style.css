@@ -34,11 +34,15 @@ button {
     background-color: blueviolet;
 }
 
+#initialsBtn {
+    padding: 0.3em .6em;
+}
+
 #start-quiz-btn {
     margin: 2em;
 }
 
-button:hover {
+button:hover, .submit:hover  {
     background-color: violet;
     cursor: pointer;
 }
