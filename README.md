@@ -1,4 +1,4 @@
-# Challenge 4 Code Quiz: A Tool for Testing and Improving Coding Skills
+# Challenge 4 Code Quiz
 
 ## Description
 
