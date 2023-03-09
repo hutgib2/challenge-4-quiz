@@ -2,7 +2,7 @@
 
 ## Description
 
-Challenge 4 Code Quiz is a web application that was created to help students test their coding knowledge and improve their coding skills. The application was built from scratch using JavaScript and incorporates a range of functional buttons and uses data structures to store high scores.
+Challenge 4 Code Quiz is a web application to help me understand coding and improve my coding skills. The application was built from scratch using JavaScript and uses a range of functional buttons and uses data structures to store high scores.
 
 ## Learning Objectives
 
@@ -12,8 +12,6 @@ The primary learning objectives of this project are to:
 -   Use data structures to store high scores
 -   Develop a range of functional buttons
 -   Style different elements of a web application
-
-By achieving these objectives, students will gain a solid foundation in JavaScript, which is essential for developing dynamic web applications.
 
 ## Screenshots and Links
 
@@ -33,11 +31,7 @@ To install the Challenge 4 Code Quiz application on your computer, you can clone
 
 ## Usage
 
-The Challenge 4 Code Quiz application is an excellent example of how to create a timed quiz using JavaScript. It can be used by students to test their coding knowledge, by teachers to assess their students' skills, or by anyone who wants to improve their JavaScript programming skills.
-
-## Credits
-
-The Challenge 4 Code Quiz application was created by hutgib2, who received support and guidance from the USYD coding boot camp. Although there were no collaborators on this project, tutorials and information from the coding boot camp provided valuable assistance in the application's development.
+The Challenge 4 Code Quiz application is an example of how to create a timed quiz using JavaScript.
 
 ## License
 
