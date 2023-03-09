@@ -23,35 +23,35 @@ let questions = [
   },
     {
     numb: 3,
-    question: "What does PHP stand for?",
-    answer: "Hypertext Preprocessor",
+    question: "Which built-in method removes the last element from an array and returns that element?",
+    answer: "pop()",
     options: [
-      "Hypertext Preprocessor",
-      "Hypertext Programming",
-      "Hypertext Preprogramming",
-      "Hometext Preprocessor"
+      "last()",
+      "get()",
+      "pop()",
+      "None of the above."
     ]
   },
     {
     numb: 4,
-    question: "What does SQL stand for?",
-    answer: "Structured Query Language",
+    question: "What is the difference between an opening tag and a closing tag?",
+    answer: "Closing tag has a / in front",
     options: [
-      "Stylish Question Language",
-      "Stylesheet Query Language",
-      "Statement Question Language",
-      "Structured Query Language"
+      "Opening tag has a / in front",
+      "Closing tag has a / in front",
+      "There is no difference",
+      "None of the above."
     ]
   },
     {
     numb: 5,
-    question: "What does XML stand for?",
-    answer: "eXtensible Markup Language",
+    question: "Which of the following defines a relative measurement for the height of a font in em spaces?",
+    answer: "em",
     options: [
-      "eXtensible Markup Language",
-      "eXecutable Multiple Language",
-      "eXTra Multi-Program Language",
-      "eXamine Multiple Language"
+      "%",
+      "cm",
+      "em",
+      "ex"
     ]
   },
 ];
@@ -65,12 +65,22 @@ var questionText = document.getElementById("question");
 var answerDiv = document.getElementById("answer-div");
 var heroSection = document.getElementById("hero-section");
 var timerElement = document.getElementById("timer");
+var correctDiv = document.getElementById("correct");
 
 startQuizBtn.addEventListener("click", startQuiz);
 
 var questionNumber = 0;
 var time = 75;
 var counter;
+
+function mainPage(){
+  questionText.innerHTML = "Coding Quiz Challenge"
+  answerDiv.innerHTML = "Try to answer the following code-related questions within the time limit. Keep in mind that incorrent answers will penalize your score/time by seconds!"
+  heroSection.appendChild(startQuizBtn);
+  questionNumber = 0;
+  time = 75;
+  timerElement.innerHTML = "Time: " + time;  
+}
 
 function startQuiz() {
     answerDiv.innerHTML = "";
@@ -84,7 +94,10 @@ function startTimer(){
   counter = setInterval(timer, 1000);
     function timer(){
       time--;
-      timerElement.innerHTML = "Time: " + time;  
+      timerElement.innerHTML = "Time: " + time;
+      if (time < 1) {
+        timeUp();
+      }
     }
 }
 
@@ -126,6 +139,9 @@ function checkAnswer(questionNumber, answer){
   if (questions[questionNumber - 1].answer != answer) {
     time = time - 15;
     timerElement.innerHTML = "Time: " + time;
+    correctDiv.innerHTML = "Wrong!"
+  } else {
+    correctDiv.innerHTML = "Correct!"
   }
   
 
@@ -149,6 +165,7 @@ initialsDiv.appendChild(initialsBtn)
 
 
 function showResults() {
+  correctDiv.innerHTML = "";
   questionText.innerHTML = "All done!"
   clearInterval(counter);
   timerElement.innerHTML = "Time: " + time;  
@@ -160,6 +177,11 @@ function showResults() {
 var highScores = [
 ]
 
+var highScoreList = document.createElement("ol");
+var goBackBtn = document.createElement("button");
+goBackBtn.addEventListener("click", mainPage);
+goBackBtn.innerHTML = "Go back";
+
 function showHighScores() {
 
   // var intialsInput = document.getElementById("initials");
@@ -170,8 +192,7 @@ function showHighScores() {
 
   questionText.innerHTML = "High Scores";
 
-  var highScoreList = document.createElement("ol");
-
+  highScoreList.innerHTML = "";
   highScores.forEach((element) => {
     var highScore = document.createElement("li");
     highScore.innerHTML = element;
@@ -180,5 +201,30 @@ function showHighScores() {
 
   answerDiv.innerHTML = "";
   answerDiv.appendChild(highScoreList);
+
+  var clearHighScoresBtn = document.createElement("button");
+  
+  clearHighScoresBtn.innerHTML = "Clear high scores";
+
+  
+  clearHighScoresBtn.addEventListener("click", removeHighScores)
+
+  answerDiv.appendChild(goBackBtn);
+  answerDiv.appendChild(clearHighScoresBtn);
+}
+
+function removeHighScores() {
+  highScores = [
+  ]
+  highScoreList.innerHTML = "";
+}
+
+function timeUp() {
+
+  questionText.innerHTML = "Times Up!"
+  clearInterval(counter);
+  answerDiv.innerHTML = "Please try again"
+  answerDiv.appendChild(goBackBtn);
+  correctDiv.innerHTML = "";
 
 }
